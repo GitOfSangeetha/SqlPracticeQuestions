@@ -1,0 +1,13 @@
+##Return a report of the customers who have spent over $450 since our restaurant opened
+
+SELECT c.Customerid,c.Firstname,c.Lastname,sum(d.PRICE) as TotalSpend
+FROM Orders o 
+INNER JOIN Customers c
+on c.CUSTOMERID = o.CUSTOMERID
+INNER JOIN OrdersDishes od 
+on o.ORDERID = od.ORDERID
+INNER JOIN Dishes d 
+on od.DISHID = d.DISHID
+GROUP BY c.CUSTOMERID
+HAVING sum(d.PRICE) > 450 
+ORDER BY TotalSpend DESC;
